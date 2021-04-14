@@ -1,0 +1,7 @@
+package 贪心;
+
+public class 合并果子_优先队列 {
+	private static void main() {
+		
+	}
+}

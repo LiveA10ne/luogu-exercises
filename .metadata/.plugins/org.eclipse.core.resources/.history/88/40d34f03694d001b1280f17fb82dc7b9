@@ -1,0 +1,30 @@
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner scanner = new Scanner(System.in);
+		String string = scanner.nextLine();
+		int pass = Integer.parseInt(scanner.nextLine());
+		String [] time = string.split("\\:");
+		int hh = Integer.parseInt(time[0]);
+		int mm = Integer.parseInt(time[1]);
+		int ss = Integer.parseInt(time[2]);
+		int hours = pass / 3600;
+		int minutes = (pass - hours * 3600) / 60;
+		int secends = (pass - hours * 3600 - minutes * 60);
+		int laterHh=0,laterMs=0,laterSs=0;
+		if (ss + secends >= 60) {
+			minutes ++;			
+		}
+		laterSs = (ss + secends) % 60;
+		if (mm + minutes >= 60) {
+			hours++;
+		}
+		laterMs =(laterMs + mm + minutes) % 60;
+		laterHh = (laterHh + hh + hours) % 24;
+		System.out.printf("%02d:%02d:%02d",laterHh,laterMs,laterSs);
+	}	
+
+}

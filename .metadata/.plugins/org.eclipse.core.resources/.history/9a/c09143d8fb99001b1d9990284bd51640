@@ -1,0 +1,58 @@
+package 贪心;
+
+import java.io.*;
+import java.util.Arrays;
+
+public class 纪念品分组 {
+
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StreamTokenizer st = new StreamTokenizer(br);
+		PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+		
+		st.nextToken();
+		int w = (int)st.nval;
+		st.nextToken();
+		int n = (int)st.nval;
+		int[] arr = new int[n];
+		for (int i = 0; i < arr.length; i++) {
+			st.nextToken();
+			arr[i] =(int)st.nval;
+		}
+		
+		Arrays.sort(arr);
+		int left = 0, right = n - 1;
+		int ans = 0;
+		int sum = 0;
+		outer:
+		while (right >=left) {
+			while (sum < w && right >= left) {
+				if (right == left) {
+					ans++;
+					break outer;
+				}
+				sum += arr[right];
+				if (sum >= w && right >=left) {
+					right--;
+					ans++;
+					sum = 0;
+				}else{
+					sum += arr[left];
+					if (sum < w && right >=left) {
+						left++;
+					}
+					if (sum >= w && right >= left) {
+						right--;
+						ans++;
+						sum = 0;
+					}
+				}
+			}
+		}
+		
+		pw.print(ans);
+		pw.close();
+	}
+
+}

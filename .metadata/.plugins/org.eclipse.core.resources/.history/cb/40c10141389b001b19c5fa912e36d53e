@@ -1,0 +1,10 @@
+package 二分;
+
+public class A减B数对 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

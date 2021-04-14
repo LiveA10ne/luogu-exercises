@@ -1,0 +1,51 @@
+package 二分;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.io.StreamTokenizer;
+import java.math.BigInteger;
+import java.util.Arrays;
+
+public class A减B数对 {
+	
+	private static int ans = 0;
+	private static int n;
+	private static BigInteger c;
+	private static BigInteger[] arr;
+
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StreamTokenizer st = new StreamTokenizer(br);
+		PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+		
+		st.nextToken();
+		n = (int)st.nval;
+		arr = new BigInteger[n];
+		st.ordinaryChars(33, 255);
+		st.wordChars(33, 255);
+		st.nextToken();
+		c = new BigInteger(st.sval);
+		for (int i = 0; i < n; i++) {
+			st.nextToken();
+			arr[i] = new BigInteger(st.sval);
+		}
+		
+		Arrays.sort(arr);
+		for (int i = 0; i < n; i++) {
+			BigInteger a = c.add(arr[i]);
+			int index = Arrays.binarySearch(arr, a);
+			if (index >= 0) {
+				ans++;
+			}
+		}
+		
+		pw.print(ans);
+		pw.close();
+	}
+
+}

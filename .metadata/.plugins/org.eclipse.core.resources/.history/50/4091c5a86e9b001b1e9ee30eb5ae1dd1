@@ -1,0 +1,55 @@
+package 二分;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.io.StreamTokenizer;
+
+import javax.sound.midi.MidiChannel;
+
+public class 一元三次方程求解 {
+	
+	private static double a;
+	private static double b;
+	private static double c;
+	private static double d;
+
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StreamTokenizer st = new StreamTokenizer(br);
+		PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+		
+		st.nextToken();
+		a = st.nval;
+		st.nextToken();
+		b = st.nval;
+		st.nextToken();
+		c = st.nval;
+		st.nextToken();
+		d = st.nval;
+		
+		double left = -100, right = 100;
+		while (right >= left) {
+			double mid = (left + right) / 2;
+			if (f(left) * f(mid) <= 0) {
+				right = mid - 1;
+			}else {
+				left = mid + 1;
+			}
+		}
+		
+		pw.print(f(2));
+		
+		pw.print(right);
+		pw.close();
+	}
+	
+	private static double f(double x) {
+		return a * Math.pow(x, 3) + b * x * x + c * x + d;
+	}
+
+}

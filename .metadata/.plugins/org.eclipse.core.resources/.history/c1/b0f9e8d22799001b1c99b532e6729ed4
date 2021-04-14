@@ -1,0 +1,60 @@
+package 贪心;
+
+import java.io.*;
+import java.util.Arrays;
+
+public class 排队接水 {
+	
+	static class WaitTime implements Comparable<WaitTime>{
+		
+		int index;
+		int time;
+		
+		public WaitTime(int index, int time) {
+			// TODO Auto-generated constructor stub
+			this.index = index;
+			this.time = time;
+		}
+		
+		@Override
+		public int compareTo(WaitTime o) {
+			// TODO Auto-generated method stub
+			return this.time > o.time ? 1 : -1;
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+		StreamTokenizer st = new StreamTokenizer(bf);
+		PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+		
+		st.nextToken();
+		int n = (int)st.nval;
+		WaitTime[] arr = new WaitTime[n];
+		for (int i = 0; i < arr.length; i++) {
+			st.nextToken();
+			arr[i] = new WaitTime(i, (int)st.nval);
+		}
+		
+		Arrays.sort(arr);
+		int sumTime = 0;
+		StringBuffer sb = new StringBuffer();
+//		for (WaitTime waitTime : arr) {
+//			sb.append(waitTime.index + 1).append(" ");
+//			sumTime = sumTime + waitTime.time;
+//		}
+		for (int i = 0; i < arr.length; i++) {
+			sb.append(arr[i].index + 1).append(" ");
+			if (i != 0) {
+				sumTime = sumTime + arr[i - 1].time;
+			}
+		}
+		
+		pw.print(sb+"\n");
+		pw.printf("%.2f", 1.0 * sumTime /n);
+		pw.close();
+		
+	}
+
+}

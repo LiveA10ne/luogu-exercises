@@ -1,0 +1,52 @@
+package 暴力枚举;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.io.StreamTokenizer;
+import java.util.ArrayList;
+import java.util.Formatter;
+
+public class 全排列 {
+	
+	private static int n;
+	private static StringBuilder sb = new StringBuilder();
+
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StreamTokenizer st = new StreamTokenizer(br);
+		PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+		
+		st.nextToken();
+		n = (int)st.nval;
+		dfs(new ArrayList<>(),new boolean[n + 1]);
+		
+		pw.print(sb);
+		pw.close();
+	}
+	
+	private static void dfs(ArrayList<Integer> rel,boolean[] visited) {
+		if (rel.size() == n) {
+			for (Integer integer : rel) {
+				sb.append(new Formatter().format("%5d", integer));
+			}
+			sb.append("\n");
+			return;
+		}
+		for (int i = 1; i <=n; i++) {
+			if (visited[i]) {
+				continue;
+			}
+			rel.add(i);
+			visited[i] = true;
+			dfs(rel,visited);
+			rel.remove(rel.size() - 1);
+			visited[i] = false;
+		}
+	}
+
+}

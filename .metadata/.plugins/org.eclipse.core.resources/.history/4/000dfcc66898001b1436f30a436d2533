@@ -1,0 +1,23 @@
+package 递归;
+
+import java.io.*;
+
+public class 外星密码 {
+
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+		
+		StringBuilder sb = new StringBuilder(br.readLine());
+//		while (sb.indexOf("[") != -1) {
+			int start = sb.indexOf("[");
+			int end = sb.lastIndexOf("]");
+			
+//		}
+			
+			pw.print(sb.substring(start + 1, end));
+		pw.close();
+	}
+
+}

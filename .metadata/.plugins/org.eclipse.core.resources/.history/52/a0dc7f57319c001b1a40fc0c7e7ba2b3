@@ -1,0 +1,87 @@
+package 搜索;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.io.StreamTokenizer;
+import java.util.ArrayList;
+
+public class 八皇后 {
+	
+	private static int n;
+	private static int[][] matrix;
+	private static ArrayList<Integer> cur;
+	private static ArrayList<ArrayList<Integer>> rel;
+
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StreamTokenizer st = new StreamTokenizer(br);
+		PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+		
+		st.nextToken();
+		n = (int)st.nval;
+		matrix  = new int[n+1][n+1];
+		dfs();
+		
+		
+		pw.print(rel.toString());
+		pw.close();
+	}
+	
+	private static void dfs() {
+		if (cur.size() == n) {
+			rel.add(new ArrayList<>(cur));
+		}
+		for (int i = 1; i <= n; i++) {
+			for (int j = 1; j <=n; j++) {
+				if (check(i, j)) {
+					cur.add(j);
+				}
+				dfs();
+				cur.remove(cur.size() - 1);
+			}
+		}
+	}
+	
+	private static boolean check(int r, int c) {
+		for (int i = 1; i <= n; i++) {
+			if (matrix[r][i] != 0) {
+				return false;
+			}
+		}
+		for (int i = 1; i <= n; i++) {
+			if (matrix[i][c] != 0) {
+				return false;
+			}
+		}
+		int x = r, y = c;
+		while (x < n && y < n) {
+			if (matrix[++x][++y] != 0) {
+				return false;
+			}
+		}
+		x = r;
+		y= c;
+		while (x > 1 && y > 1) {
+			if (matrix[--x][--y] != 0) {
+				return false;
+			}
+		}
+		while (r < n && c > 1) {
+			if (matrix[++r][--c] != 0) {
+				return false;
+			}
+		}
+		while (r > 1 && c < n) {
+			if (matrix[--r][++c] != 0) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+}

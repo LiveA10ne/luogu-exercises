@@ -1,0 +1,10 @@
+package 贪心;
+
+public class 合并果子_优先队列 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

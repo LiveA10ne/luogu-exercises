@@ -1,0 +1,10 @@
+package 递归;
+
+public class 数楼梯 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,57 @@
+package 贪心;
+
+import java.io.*;
+import java.util.Arrays;
+
+public class 查找 {
+
+	public static void main(String[] args) throws IOException{
+		// TODO Auto-generated method stub
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StreamTokenizer st = new StreamTokenizer(br);
+		PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+		
+		st.nextToken();
+		int n = (int)st.nval;
+		st.nextToken();
+		int m = (int)st.nval;
+		int[] arr = new int[n];
+		for (int i = 0; i < arr.length; i++) {
+			st.nextToken();
+			arr[i] = (int)st.nval;
+		}
+		int[] keyArr = new int[m];
+		for (int i = 0; i < keyArr.length; i++) {
+			st.nextToken();
+			keyArr[i] =(int)st.nval;
+		}
+		
+		int fromIndex = 0 , toIndex = n - 1;
+		for (int i = 0; i < m - 1; i++) {
+			int index = Arrays.binarySearch(arr,fromIndex,toIndex, keyArr[i]);
+			if (index == 0) {
+				pw.print(index +1 +" ");
+			}else if (index > 0) {
+				for (int j = index - 1; j >= 0; j--) {
+					if (arr[j] != keyArr[i]) {
+						break;
+					}
+					if (arr[j] == keyArr[i]) {
+						index = j;
+					}
+				}
+				pw.print(index +1 +" ");
+			}else {
+				pw.print(-1 + " ");
+			}
+			if (keyArr[i+1] > keyArr[i]) {
+				fromIndex = index;
+			}else {
+				toIndex = index;
+			}
+		}
+		
+		pw.close();
+	}
+
+}

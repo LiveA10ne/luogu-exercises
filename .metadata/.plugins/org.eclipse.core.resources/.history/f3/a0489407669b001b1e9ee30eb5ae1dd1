@@ -1,0 +1,62 @@
+package 二分;
+
+import java.io.*;
+import java.util.Arrays;
+
+
+public class 砍树 {
+	
+	private static int n;
+	private static int m;
+	private static int[] arr;
+
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StreamTokenizer st = new StreamTokenizer(br);
+		PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+		
+		st.nextToken(); 
+		n = (int)st.nval;
+		st.nextToken();
+		m = (int)st.nval;
+		arr = new int[n];
+		for (int i = 0; i < n; i++) {
+			st.nextToken();
+			arr[i] = (int)st.nval;
+		}
+		
+		int longest = maxOfArr(arr);
+		int left = longest - m;
+		while (longest > left) {
+			int sum = 0;
+			int mid = (longest + left) / 2;
+			for (int i = 0; i < n; i++) {
+				if (arr[i] > mid) {
+					sum += arr[i] - mid;
+				}
+			}
+			if (sum == m ) {
+				pw.print(mid);
+				break;
+			}else if (sum > m) {
+				left = mid;
+			}else if (sum < m) {
+				longest = mid;
+			}
+		}
+		
+		pw.close();
+	}
+	
+	private static int maxOfArr(int[] arr) {
+		int max = arr[0];
+		for (int i = 1; i < arr.length; i++) {
+			if (arr[i] > max) {
+				max = arr[i];
+			}
+		}
+		return max;
+	}
+
+}

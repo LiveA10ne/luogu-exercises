@@ -1,0 +1,29 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner scanner = new Scanner(System.in);
+		int arrayLength = scanner.nextInt();
+		int [] array = new int [arrayLength];
+		for (int i = 0; i < array.length; i++) {
+			array[i] = scanner.nextInt();
+		}
+		int max = 0, count = 0, number =0;
+		for (int i = 0; i < array.length; i++) {
+			for (int j = 0; j < array.length; j++) {
+				if (array[i] == array[j]) {
+					count++;
+				}
+			}
+			if (count > max) {
+				max = count;
+				number = array[i];
+			}
+		}
+		System.out.printf("%d %d",number,max);
+	}	
+
+}

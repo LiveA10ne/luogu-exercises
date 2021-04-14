@@ -1,0 +1,64 @@
+package 递归;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.io.StreamTokenizer;
+import java.util.ArrayList;
+
+public class 过河卒 {
+	
+	private static MyPoint b;
+	private static MyPoint horse;
+	private static ArrayList<MyPoint> ban = new ArrayList<>();
+	
+	static class MyPoint implements Comparable<MyPoint>{
+		int x;
+		int y;
+		
+		public MyPoint(int x, int y) {
+			// TODO Auto-generated constructor stub
+			this.x = x;
+			this.y = y;
+		}
+
+		@Override
+		public int compareTo(MyPoint o) {
+			// TODO Auto-generated method stub
+			return this.x == o.x && this.y == o.y ? 0 : 1;
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StreamTokenizer st = new StreamTokenizer(br);
+		PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+		
+		st.nextToken();
+		int xB = (int)st.nval;
+		st.nextToken();
+		int yB = (int)st.nval;
+		st.nextToken();
+		int xH = (int)st.nval;
+		st.nextToken();
+		int yH = (int)st.nval;
+		b = new MyPoint(xB, yB);
+		horse = new MyPoint(xH, yH);
+		ban.add(horse);
+		ban.add(new MyPoint(horse.x - 1, horse.y - 2));
+		ban.add(new MyPoint(horse.x - 2, horse.y - 1));
+		ban.add(new MyPoint(horse.x - 2, horse.y + 1));
+		ban.add(new MyPoint(horse.x - 1, horse.y + 2));
+		ban.add(new MyPoint(horse.x + 1, horse.y + 2));
+		ban.add(new MyPoint(horse.x + 2, horse.y + 1));
+		ban.add(new MyPoint(horse.x + 2, horse.y - 1));
+		ban.add(new MyPoint(horse.x + 1, horse.y - 2));
+		pw.print(new MyPoint(1,1).compareTo(new MyPoint(1, 1)));
+		pw.close();
+	}
+
+}
